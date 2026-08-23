@@ -9,12 +9,13 @@
     "build": "tsc",
     "start": "node dist/server/app.js"
   },
-
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
+    "@types/ejs": "^3.1.5",
+    "tsx": "^4.23.12",
     "typescript": "^7.0.2"
   },
   "dependencies": {
@@ -22,6 +23,7 @@
     "dotenv": "^17.4.2",
     "ejs": "^6.0.1",
     "express": "^5.2.1",
+    "firebase": "^12.18.0",
     "nodemon": "^3.1.14"
   }
 }

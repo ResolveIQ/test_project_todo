@@ -1,7 +1,7 @@
-import { UserCredential } from "firebase/auth";
+import { DecodedIdToken } from "firebase-admin/auth";
 
 export interface IRepository{
 
-    create():Promise<UserCredential>
+    create(id_token:string):Promise<DecodedIdToken>
     
 }

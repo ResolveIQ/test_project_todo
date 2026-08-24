@@ -9,6 +9,7 @@ const authRepo = new AuthRepository()
 const authService = new AuthService(authRepo)
 const authController = new AuthController(authService)
 
-AuthRouter.get("/",(req,res)=>authController.getLogin(req,res))
+AuthRouter.get("/login",(req,res)=>authController.getLogin(req,res))
+AuthRouter.post("/google",(req,res)=>authController.loginWithGoogle(req,res))
 
 export default AuthRouter

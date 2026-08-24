@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(errorMiddleware)
 
-app.use('/login',AuthRouter)
+app.use('/auth',AuthRouter)
 
 app.listen(process.env.PORT,()=>{
     console.log(`Server running at http://localhost:${process.env.PORT||null}`)

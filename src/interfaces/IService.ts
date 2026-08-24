@@ -1,8 +1,8 @@
-import { UserCredential } from "firebase/auth";
+import { DecodedIdToken } from "firebase-admin/auth";
 
 
 export interface IService{
 
-    googleLogin():Promise<UserCredential>
+    googleLogin(id_token:string):Promise<DecodedIdToken>
 
 }

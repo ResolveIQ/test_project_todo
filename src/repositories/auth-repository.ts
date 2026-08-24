@@ -1,12 +1,12 @@
-import { signInWithPopup, UserCredential } from "firebase/auth";
-import { auth, googleProvider } from "../firebase/firebase";
 import { IRepository } from "../interfaces/IRepository";
+import { adminAuth } from "../firebase/firebase-admin";
+import { DecodedIdToken } from "firebase-admin/auth";
 
 
 class AuthRepository implements IRepository{
     
-    async create(): Promise<UserCredential> {
-        return signInWithPopup(auth,googleProvider)
+    async create(id_token:string): Promise<DecodedIdToken> {
+        return await adminAuth.verifyIdToken(id_token)
     }
 
 }

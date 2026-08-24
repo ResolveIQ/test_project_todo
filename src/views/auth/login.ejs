@@ -1,290 +1,323 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reminders</title>
-  <!-- Google Fonts for typography and handwriting style -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reminders</title>
+    <!-- Google Fonts for typography and handwriting style -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
-    body {
-      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background-color: #ffffff;
-      color: #111827;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-    }
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-    .main-container {
-      width: 100%;
-      max-width: 1280px;
-      min-height: calc(100vh - 48px);
-      display: grid;
-      grid-template-columns: 0.95fr 1.35fr;
-      gap: 32px;
-      align-items: stretch;
-    }
+      body {
+        font-family:
+          "Plus Jakarta Sans",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          sans-serif;
+        background-color: #ffffff;
+        color: #111827;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+      }
 
-    /* Left Panel Styling */
-    .left-panel {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 24px 20px 24px 12px;
-    }
-
-    .left-top-text {
-      color: #86198f;
-      font-size: 16px;
-      font-weight: 600;
-      line-height: 1.38;
-      max-width: 250px;
-      letter-spacing: -0.2px;
-    }
-
-    .left-middle-quote {
-      margin: 40px 0;
-    }
-
-    .cursive-text {
-      font-family: 'Caveat', cursive;
-      font-size: 62px;
-      font-weight: 500;
-      line-height: 1.15;
-      color: #000000;
-      letter-spacing: 0.5px;
-    }
-
-    .btn-be-reminded {
-      background-color: #000000;
-      color: #ffffff;
-      border: none;
-      padding: 12px 28px;
-      border-radius: 9999px;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      width: fit-content;
-      transition: background-color 0.2s ease, transform 0.2s ease;
-    }
-
-    .btn-be-reminded:hover {
-      background-color: #222222;
-      transform: translateY(-1px);
-    }
-
-    /* Right Panel Styling */
-    .right-panel {
-      background-color: #85055b;
-      border-radius: 36px;
-      padding: 44px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .right-header-text {
-      color: #ffffff;
-      font-size: 29px;
-      font-weight: 500;
-      line-height: 1.32;
-      letter-spacing: -0.4px;
-      margin-bottom: 40px;
-      max-width: 96%;
-    }
-
-    .cards-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      flex-grow: 1;
-    }
-
-    /* Card Item Styling */
-    .feature-card {
-      background-color: #ffffff;
-      border-radius: 28px;
-      padding: 26px 24px 24px 24px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      position: relative;
-      overflow: hidden;
-      min-height: 410px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
-    }
-
-    .card-top {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .feature-tag {
-      background-color: #e5e7eb;
-      color: #4b5563;
-      font-size: 11px;
-      font-weight: 600;
-      padding: 4px 14px;
-      border-radius: 9999px;
-      width: fit-content;
-      margin-bottom: 20px;
-    }
-
-    .card-heading {
-      font-size: 27px;
-      font-weight: 600;
-      color: #111827;
-      line-height: 1.2;
-      letter-spacing: -0.6px;
-      margin-bottom: 16px;
-    }
-
-    .card-description {
-      font-size: 13.5px;
-      color: #6b7280;
-      line-height: 1.45;
-      margin-bottom: 18px;
-    }
-
-    .card-quote {
-      font-size: 13.5px;
-      font-weight: 700;
-      color: #111827;
-      line-height: 1.4;
-    }
-
-    .card-bottom {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      margin-top: 20px;
-    }
-
-    .ready-tag {
-      background-color: #e5e7eb;
-      color: #4b5563;
-      font-size: 11px;
-      font-weight: 600;
-      padding: 4px 12px;
-      border-radius: 9999px;
-      width: fit-content;
-    }
-
-    .card-graphic {
-      width: 90px;
-      height: 90px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* Responsive Layout */
-    @media (max-width: 1024px) {
       .main-container {
-        grid-template-columns: 1fr;
+        width: 100%;
+        max-width: 1280px;
+        min-height: calc(100vh - 48px);
+        display: grid;
+        grid-template-columns: 0.95fr 1.35fr;
+        gap: 32px;
+        align-items: stretch;
       }
-      .right-panel {
-        padding: 32px;
-      }
+
+      /* Left Panel Styling */
       .left-panel {
-        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 24px 20px 24px 12px;
       }
-    }
 
-    @media (max-width: 640px) {
-      .cards-grid {
-        grid-template-columns: 1fr;
+      .left-top-text {
+        color: #86198f;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 1.38;
+        max-width: 250px;
+        letter-spacing: -0.2px;
       }
+
+      .left-middle-quote {
+        margin: 40px 0;
+      }
+
       .cursive-text {
-        font-size: 46px;
+        font-family: "Caveat", cursive;
+        font-size: 62px;
+        font-weight: 500;
+        line-height: 1.15;
+        color: #000000;
+        letter-spacing: 0.5px;
       }
+
+      .btn-be-reminded {
+        background-color: #000000;
+        color: #ffffff;
+        border: none;
+        padding: 12px 28px;
+        border-radius: 9999px;
+        font-family: "Plus Jakarta Sans", sans-serif;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        width: fit-content;
+        transition:
+          background-color 0.2s ease,
+          transform 0.2s ease;
+      }
+
+      .btn-be-reminded:hover {
+        background-color: #222222;
+        transform: translateY(-1px);
+      }
+
+      /* Right Panel Styling */
+      .right-panel {
+        background-color: #85055b;
+        border-radius: 36px;
+        padding: 44px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
       .right-header-text {
-        font-size: 22px;
+        color: #ffffff;
+        font-size: 29px;
+        font-weight: 500;
+        line-height: 1.32;
+        letter-spacing: -0.4px;
+        margin-bottom: 40px;
+        max-width: 96%;
       }
-    }
-  </style>
-</head>
-<body>
 
-  <main class="main-container">
-    <!-- Left Column Section -->
-    <section class="left-panel">
-      <p class="left-top-text">
-        Tell us what you need to remember and where or when it matters. We'll take it from there.
-      </p>
+      .cards-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        flex-grow: 1;
+      }
 
-      <div class="left-middle-quote">
-        <h1 class="cursive-text">“Be reminded<br>Not bombarded</h1>
-      </div>
+      /* Card Item Styling */
+      .feature-card {
+        background-color: #ffffff;
+        border-radius: 28px;
+        padding: 26px 24px 24px 24px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+        overflow: hidden;
+        min-height: 410px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+      }
 
-      <button class="btn-be-reminded">Be reminded</button>
-    </section>
+      .card-top {
+        display: flex;
+        flex-direction: column;
+      }
 
-    <!-- Right Column Section -->
-    <section class="right-panel">
-      <h2 class="right-header-text">
-        Your day doesn't run on a perfect schedule, so why should your reminders? Keep things flexible, stay in the moment, and let your reminders follow your life.
-      </h2>
+      .feature-tag {
+        background-color: #e5e7eb;
+        color: #4b5563;
+        font-size: 11px;
+        font-weight: 600;
+        padding: 4px 14px;
+        border-radius: 9999px;
+        width: fit-content;
+        margin-bottom: 20px;
+      }
 
-      <div class="cards-grid">
-        <!-- Card 1: Location based reminders -->
-        <article class="feature-card">
-          <div class="card-top">
-            <span class="feature-tag">Our Feature</span>
-            <h3 class="card-heading">Location based<br>reminders</h3>
-            <p class="card-description">
-              Receive reminders when you arrive at or leave a specific location.
-            </p>
-            <p class="card-quote">"Buy groceries when I reach LuLu Mall."</p>
-          </div>
-          <div class="card-bottom">
-            <span class="ready-tag">We're ready</span>
-            <div class="card-graphic">
-              <svg width="100%" height="100%" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <g fill="#a78bfa">
-                  <circle cx="50" cy="24" r="19" />
-                  <circle cx="68" cy="32" r="19" />
-                  <circle cx="76" cy="50" r="19" />
-                  <circle cx="68" cy="68" r="19" />
-                  <circle cx="50" cy="76" r="19" />
-                  <circle cx="32" cy="68" r="19" />
-                  <circle cx="24" cy="50" r="19" />
-                  <circle cx="32" cy="32" r="19" />
-                </g>
-                <path d="M 50 37 Q 50 50 63 50 Q 50 50 50 63 Q 50 50 37 50 Q 50 50 50 37 Z" fill="#ffffff" />
-              </svg>
+      .card-heading {
+        font-size: 27px;
+        font-weight: 600;
+        color: #111827;
+        line-height: 1.2;
+        letter-spacing: -0.6px;
+        margin-bottom: 16px;
+      }
+
+      .card-description {
+        font-size: 13.5px;
+        color: #6b7280;
+        line-height: 1.45;
+        margin-bottom: 18px;
+      }
+
+      .card-quote {
+        font-size: 13.5px;
+        font-weight: 700;
+        color: #111827;
+        line-height: 1.4;
+      }
+
+      .card-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-top: 20px;
+      }
+
+      .ready-tag {
+        background-color: #e5e7eb;
+        color: #4b5563;
+        font-size: 11px;
+        font-weight: 600;
+        padding: 4px 12px;
+        border-radius: 9999px;
+        width: fit-content;
+      }
+
+      .card-graphic {
+        width: 90px;
+        height: 90px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Responsive Layout */
+      @media (max-width: 1024px) {
+        .main-container {
+          grid-template-columns: 1fr;
+        }
+        .right-panel {
+          padding: 32px;
+        }
+        .left-panel {
+          padding: 20px;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .cards-grid {
+          grid-template-columns: 1fr;
+        }
+        .cursive-text {
+          font-size: 46px;
+        }
+        .right-header-text {
+          font-size: 22px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="main-container">
+      <!-- Left Column Section -->
+      <section class="left-panel">
+        <p class="left-top-text">
+          Tell us what you need to remember and where or when it matters. We'll
+          take it from there.
+        </p>
+
+        <div class="left-middle-quote">
+          <h1 class="cursive-text">“Be reminded<br />Not bombarded</h1>
+        </div>
+
+        <button class="btn-be-reminded" id="google-login">Be reminded</button>
+      </section>
+
+      <!-- Right Column Section -->
+      <section class="right-panel">
+        <h2 class="right-header-text">
+          Your day doesn't run on a perfect schedule, so why should your
+          reminders? Keep things flexible, stay in the moment, and let your
+          reminders follow your life.
+        </h2>
+
+        <div class="cards-grid">
+          <!-- Card 1: Location based reminders -->
+          <article class="feature-card">
+            <div class="card-top">
+              <span class="feature-tag">Our Feature</span>
+              <h3 class="card-heading">Location based<br />reminders</h3>
+              <p class="card-description">
+                Receive reminders when you arrive at or leave a specific
+                location.
+              </p>
+              <p class="card-quote">"Buy groceries when I reach LuLu Mall."</p>
             </div>
-          </div>
-        </article>
+            <div class="card-bottom">
+              <span class="ready-tag">We're ready</span>
+              <div class="card-graphic">
+                <svg
+                  width="100%"
+                  height="100%"
+                  viewBox="0 0 100 100"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g fill="#a78bfa">
+                    <circle cx="50" cy="24" r="19" />
+                    <circle cx="68" cy="32" r="19" />
+                    <circle cx="76" cy="50" r="19" />
+                    <circle cx="68" cy="68" r="19" />
+                    <circle cx="50" cy="76" r="19" />
+                    <circle cx="32" cy="68" r="19" />
+                    <circle cx="24" cy="50" r="19" />
+                    <circle cx="32" cy="32" r="19" />
+                  </g>
+                  <path
+                    d="M 50 37 Q 50 50 63 50 Q 50 50 50 63 Q 50 50 37 50 Q 50 50 50 37 Z"
+                    fill="#ffffff"
+                  />
+                </svg>
+              </div>
+            </div>
+          </article>
 
-        <!-- Card 2: Timing Meets Context -->
-        <article class="feature-card">
-          <div class="card-top">
-            <span class="feature-tag">Our Feature</span>
-            <h3 class="card-heading">Timing Meets<br>Context</h3>
-            <p class="card-description">
-              Combine time with location for smarter reminders.
-            </p>
-            <p class="card-quote">"At 6 PM, remind me to go to the gym if I'm still at the office."</p>
-          </div>
-          <div class="card-bottom">
-            <span class="ready-tag">We're ready</span>
-            <div class="card-graphic">
-              <svg width="100%" height="100%" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M50 8 
+          <!-- Card 2: Timing Meets Context -->
+          <article class="feature-card">
+            <div class="card-top">
+              <span class="feature-tag">Our Feature</span>
+              <h3 class="card-heading">Timing Meets<br />Context</h3>
+              <p class="card-description">
+                Combine time with location for smarter reminders.
+              </p>
+              <p class="card-quote">
+                "At 6 PM, remind me to go to the gym if I'm still at the
+                office."
+              </p>
+            </div>
+            <div class="card-bottom">
+              <span class="ready-tag">We're ready</span>
+              <div class="card-graphic">
+                <svg
+                  width="100%"
+                  height="100%"
+                  viewBox="0 0 100 100"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M50 8 
                          Q55 28 72 16 
                          Q68 36 90 32 
                          Q78 48 95 62 
@@ -294,14 +327,85 @@
                          Q28 64 8 60 
                          Q26 48 12 30 
                          Q32 35 28 14 
-                         Q46 26 50 8 Z" fill="#60a5fa" />
-              </svg>
+                         Q46 26 50 8 Z"
+                    fill="#60a5fa"
+                  />
+                </svg>
+              </div>
             </div>
-          </div>
-        </article>
-      </div>
-    </section>
-  </main>
+          </article>
+        </div>
+      </section>
+    </main>
 
-</body>
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+      import {
+        getAuth,
+        GoogleAuthProvider,
+        signInWithPopup,
+      } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+      // Firebase client configuration
+      const firebaseConfig = {
+        apiKey: "<%= firebaseConfig.apiKey %>",
+        authDomain: "context-based-todo.firebaseapp.com",
+        projectId: "context-based-todo",
+        storageBucket: "context-based-todo.firebasestorage.app",
+        messagingSenderId: "54341318440",
+        appId: "<%= firebaseConfig.appId %>",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+
+      const auth = getAuth(app);
+
+      const googleProvider = new GoogleAuthProvider();
+
+      // Google login button
+      const googleButton = document.getElementById("google-login");
+
+      googleButton.addEventListener("click", async () => {
+        try {
+          // 1. Open Google popup
+          const result = await signInWithPopup(auth, googleProvider);
+
+          // 2. Get Firebase ID token
+          const id_token = await result.user.getIdToken();
+
+          // 3. Send token to your backend
+          const response = await fetch("/auth/google", {
+            method: "POST",
+
+            headers: {
+              "Content-Type": "application/json",
+            },
+
+            body: JSON.stringify({
+              id_token,
+            }),
+          });
+
+          // 4. Read backend response
+          const data = await response.json();
+
+          if (data.success) {
+            console.log("Login successful");
+
+            // Redirect after login
+            window.location.href = "/home";
+          } else {
+            document.getElementById("error-message").textContent = data.message;
+          }
+        } catch (error) {
+          console.error("Google login error:", error);
+
+          document.getElementById("error-message").textContent =
+            "Google login failed";
+        }
+      });
+    </script>
+  </body>
 </html>

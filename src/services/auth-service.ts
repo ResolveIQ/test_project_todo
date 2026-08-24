@@ -1,6 +1,6 @@
-import { UserCredential } from "firebase/auth";
 import { IRepository } from "../interfaces/IRepository";
 import { IService } from "../interfaces/IService";
+import { DecodedIdToken } from "firebase-admin/auth";
 
 
 class AuthService implements IService{
@@ -9,8 +9,8 @@ class AuthService implements IService{
         private Repository:IRepository
     ){}
 
-    async googleLogin(): Promise<UserCredential> {
-        return await this.Repository.create()
+    async googleLogin(id_token:string): Promise<DecodedIdToken> {
+        return await this.Repository.create(id_token)
     }
     
 }   

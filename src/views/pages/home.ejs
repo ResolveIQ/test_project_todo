@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Get Started | Acctual</title>
+  
+  <!-- Preconnect and Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-color: #f8fafc;
+      --text-main: #18181b;
+      --text-muted: #64748b;
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-cursive: 'Caveat', cursive;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: radial-gradient(circle at center, #fbfcfd 0%, #f1f3f6 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      overflow-x: hidden;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 600px;
+      width: 100%;
+    }
+
+    /* Sticky Note Area */
+    .note-wrapper {
+      position: relative;
+      margin-bottom: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 260px;
+      height: 260px;
+    }
+
+    /* Realistic 3D Cast Shadow */
+    .note-shadow {
+      position: absolute;
+      top: 15px;
+      left: 20px;
+      width: 190px;
+      height: 190px;
+      background: rgba(0, 0, 0, 0.16);
+      transform: rotate(14deg) skew(20deg, 15deg) scale(0.95);
+      filter: blur(16px);
+      z-index: 1;
+      pointer-events: none;
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .sticky-note {
+      position: relative;
+      background: linear-gradient(135deg, #fffbb2 0%, #fef08a 70%, #fde047 100%);
+      width: 190px;
+      height: 190px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transform: rotate(-6deg);
+      box-shadow: 
+        0 4px 6px -1px rgba(0, 0, 0, 0.04),
+        0 2px 4px -1px rgba(0, 0, 0, 0.02),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+      z-index: 2;
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+    }
+
+    .note-text {
+      font-family: var(--font-cursive);
+      font-size: 26px;
+      font-weight: 600;
+      color: #2e2812;
+      line-height: 1.15;
+      text-align: left;
+      transform: rotate(-0.5deg);
+      user-select: none;
+      letter-spacing: -0.3px;
+    }
+
+    .note-text span.thanks {
+      display: block;
+      text-align: right;
+      margin-top: 8px;
+      margin-right: 8px;
+    }
+
+    /* Interactive hover effects */
+    .note-wrapper:hover .sticky-note {
+      transform: rotate(-3deg) translateY(-10px) scale(1.04);
+      box-shadow: 
+        0 20px 25px -5px rgba(0, 0, 0, 0.06),
+        0 10px 10px -5px rgba(0, 0, 0, 0.03);
+    }
+
+    .note-wrapper:hover .note-shadow {
+      transform: rotate(18deg) skew(24deg, 18deg) scale(1.08) translate(12px, 18px);
+      filter: blur(20px);
+      opacity: 0.85;
+    }
+
+    /* Heading Title */
+    .title {
+      font-size: 42px;
+      font-weight: 700;
+      line-height: 1.18;
+      color: #0f172a;
+      letter-spacing: -1.2px;
+      margin-bottom: 36px;
+      max-width: 540px;
+    }
+
+    /* Form Container */
+    .form-container {
+      width: 100%;
+      max-width: 440px;
+      margin-bottom: 24px;
+      z-index: 10;
+    }
+
+    .email-form {
+      display: flex;
+      align-items: center;
+      background: #ffffff;
+      padding: 6px 6px 6px 22px;
+      border-radius: 9999px;
+      box-shadow: 
+        0 1px 3px rgba(0, 0, 0, 0.02),
+        0 10px 30px -10px rgba(0, 0, 0, 0.06);
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .email-form:focus-within {
+      border-color: #cbd5e1;
+      box-shadow: 
+        0 10px 25px -5px rgba(0, 0, 0, 0.08),
+        0 8px 10px -6px rgba(0, 0, 0, 0.03),
+        0 0 0 4px rgba(241, 245, 249, 0.9);
+      transform: translateY(-1px);
+    }
+
+    .email-input {
+      flex: 1;
+      border: none;
+      outline: none;
+      font-family: var(--font-sans);
+      font-size: 15px;
+      color: #1e293b;
+      background: transparent;
+      padding-right: 12px;
+      width: 100%;
+    }
+
+    .email-input::placeholder {
+      color: #94a3b8;
+      font-weight: 500;
+    }
+
+    .submit-btn {
+      background: #18181b;
+      color: #ffffff;
+      border: none;
+      outline: none;
+      padding: 12px 26px;
+      border-radius: 9999px;
+      font-family: var(--font-sans);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease-in-out;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .submit-btn:hover {
+      background: #09090b;
+      transform: scale(1.02);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .submit-btn:active {
+      transform: scale(0.98);
+    }
+
+    /* Brand Footer */
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      color: #94a3b8;
+      font-size: 13.5px;
+      font-weight: 500;
+      margin-top: 16px;
+      user-select: none;
+    }
+
+    .brand-logo {
+      display: inline-flex;
+      align-items: center;
+      color: #94a3b8;
+    }
+
+    .brand-name {
+      font-weight: 600;
+      color: #64748b;
+    }
+
+    /* Responsive styling */
+    @media (max-width: 640px) {
+      .title {
+        font-size: 32px;
+        margin-bottom: 28px;
+        line-height: 1.2;
+      }
+      .sticky-note, .note-shadow {
+        width: 175px;
+        height: 175px;
+      }
+      .note-text {
+        font-size: 24px;
+      }
+      .email-form {
+        padding: 5px 5px 5px 18px;
+      }
+      .email-input {
+        font-size: 14px;
+      }
+      .submit-btn {
+        padding: 11px 22px;
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="note-wrapper">
+      <div class="note-shadow"></div>
+      <div class="sticky-note">
+        <div class="note-text">
+          Everything's<br>
+          looking great!<br>
+          <span class="thanks">Thanks!</span>
+        </div>
+      </div>
+    </div>
+
+    <h1 class="title">
+      Reminders that happen <br>
+      at the right moment
+    </h1>
+
+    <div class="form-container">
+      <form class="email-form" >
+        <input type="text" id="context" class="email-input" placeholder="Enter your reminder" required />
+        <button type="submit" class="submit-btn">Remind me</button>
+      </form>
+    </div>
+
+    <div class="footer-brand">
+      <span>Powered by</span>
+      <span class="brand-logo">
+        <svg width="15" height="15" viewBox="0 0 40 40" fill="none" style="vertical-align: middle;">
+          <path d="M15 10C9.47715 10 5 14.4772 5 20C5 25.5228 9.47715 30 15 30H20V25H15C12.2386 25 10 22.7614 10 20C10 17.2386 12.2386 15 15 15H20V10H15Z" fill="currentColor" />
+          <path d="M20 10H25C30.5228 10 35 14.4772 35 20C35 25.5228 30.5228 30 25 30H20V10ZM25 25C27.7614 25 30 22.7614 30 20C30 17.2386 27.7614 15 25 15H25V25Z" fill="currentColor" />
+        </svg>
+      </span>
+      <span class="brand-name">ResolvelQ</span>
+    </div>
+  </div>
+</body>
+</html>

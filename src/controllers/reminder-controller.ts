@@ -9,4 +9,9 @@ class ReminderController {
     }
 }
 
+
+//create reminder
+//crud operations
+
+
 export default ReminderController
